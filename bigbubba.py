@@ -16,24 +16,34 @@ dest_dir = '/media/bigbubba/'
 def usbMount():
     from subprocess import check_call
     check_call(['mount', '/dev/sdb1','/media/bigbubba'])
-    time.sleep(.1)
+    time.sleep(1)
 
 # Delete all the files.
 def emptyBubba():
     for f in usb_path:
         os.remove(f)
         print(usb_path)
-    time.sleep(.1)
+    time.sleep()
 
 # Copy all files to the usb stick.
 def copyToBubba():
     for filename in glob.glob(os.path.join(source_dir, '*.*')):
         shutil.copy(filename, dest_dir)
-    time.sleep(.1)
+    time.sleep(1)
 
+print('This will delete the contents from Big Bubba, and then copy new horn files')
+time.sleep(3)
+
+print('Mounting USB horn')
 usbMount()
+
+print('Deleting files')
 emptyBubba()
+
+print('Copying files')
 copyToBubba()
+
+print('Done')
 
 
 
